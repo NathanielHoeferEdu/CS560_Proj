@@ -7,38 +7,40 @@ class QuickSort
 {
 public:
 
-    int MAX_RANGE = 10000;
+    const static int MAX_RANGE = 10000;
 
     /**
-     * @brief Sorts an array using the quick sort method.
+     * @brief Sorts an array using the quicksort method choosing the first element as pivot.
      *
      * @param arr: The array to be sorted.
      */
     static void quicksort(std::vector<int> &arr);
 
     /**
-     * @brief Sorts an array using the random quick sort method.
+     * @brief Sorts an array using the quicksort method choosing a random element as pivot.
      *
      * @param arr: The array to be sorted.
      */
     static void rand_quicksort(std::vector<int> &arr);
 
     /**
-     * @brief Generates an array of values [N+X, N+2X, N+3X, ..., N+NX]
+     * @brief Modifies an existing array by populating it with values [N+X, N+2X, N+3X, ..., N+NX]
      *
+     * @param arr: Array to be populated, preferrably empty.
      * @param n: Number of elements to be generated in the array.
      * @param x: Amount to increase the incremental elements.
-     * @return Generated ordered array.
+     * @throws invalid_argument when n < 1
      */
-    static vector<int> * increasing_array(int n, int x);
+    static void populate_increasing_array(std::vector<int> &arr, int n, int x);
 
     /**
-     * @brief Generates an array of random values from 0 to MAX_RANGE
+     * @brief Modifies an existing array by populating it with randomly ordered values from 0 to MAX_RANGE
      *
+     * @param arr: Array to be populated, preferrably empty.
      * @param n: Number of elements to be generated in the array.
-     * @return Generated random array.
+     * @throws invalid_argument when n < 1
      */
-    static vector<int> * random_array(int n);
+    static void populate_random_array(std::vector<int> &arr, int n);
 
 private:
 

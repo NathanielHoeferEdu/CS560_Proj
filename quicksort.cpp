@@ -1,6 +1,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <stdexcept>
 #include "quicksort.h"
 
 void QuickSort::quicksort(std::vector<int> &arr) {
@@ -9,6 +10,28 @@ void QuickSort::quicksort(std::vector<int> &arr) {
 
 void QuickSort::rand_quicksort(std::vector<int> &arr) {
     return QuickSort::rand_quicksort(arr, 0, arr.size()-1);
+}
+
+void QuickSort::populate_increasing_array(std::vector<int> &arr, int n, int x) {
+    if (n < 1) {
+        throw std::invalid_argument("n is not valid.");  // Invalid n
+    }
+    arr.clear();
+    for (int i = 0; i < n; i++) {
+        arr.push_back(n + (i * x));
+    }
+}
+
+void QuickSort::populate_random_array(std::vector<int> &arr, int n) {
+    if (n < 1) {
+        throw std::invalid_argument("n is not valid.");  // Invalid n
+    }
+    srand(time(NULL));
+    arr.clear();
+    for (int i = 0; i < n; i++) {
+        int val = rand() % QuickSort::MAX_RANGE;
+        arr.push_back(val);
+    }
 }
 
 int QuickSort::partition(std::vector<int> &arr, int p, int r) {
