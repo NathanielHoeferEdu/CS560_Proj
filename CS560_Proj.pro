@@ -4,8 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp \
-    quicksort.cpp
+    quicksort.cpp \
+    CS560_Asg.cpp
 
 HEADERS += \
     quicksort.h
