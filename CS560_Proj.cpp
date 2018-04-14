@@ -1,3 +1,28 @@
+//==============================================================================
+// CS 560 Project - Quicksort Analysis
+//==============================================================================
+/*
+    Author: Nathaniel Hoefer
+    Student ID: X529U639
+    Class: CS560 - Spring 2018
+    Date: 4/14/2018
+
+    Generates an array of values ranging from 1 to 10000 based on user input of
+    the following:
+    * N number of elements
+    * Populating array with random values or
+        increasing values [N+X, N+2X, N+3X, ..., N+NX]
+
+    Then the generated array is timed while sorting using one of the following
+    sorting algorithms from user input:
+    * Quicksort
+    * Random Quicksort
+
+    The resulting arrays are printed to a file within the present working
+    directory.
+
+******************************************************************************/
+
 #include <iostream>
 #include <vector>
 #include <iostream>
@@ -9,7 +34,6 @@
 
 int main()
 {
-
     std::cout << "CS560 Project - Analyzing Quicksort Runtimes" << std::endl;
     int n = 0;
     int x = 0;
