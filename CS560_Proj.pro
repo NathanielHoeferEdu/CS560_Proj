@@ -5,7 +5,9 @@ CONFIG -= qt
 
 SOURCES += \
     quicksort.cpp \
-    CS560_Asg.cpp
+    output.cpp \
+    CS560_Proj.cpp
 
 HEADERS += \
-    quicksort.h
+    quicksort.h \
+    output.h

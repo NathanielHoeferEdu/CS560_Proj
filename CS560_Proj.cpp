@@ -3,18 +3,14 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <sstream>
 #include "quicksort.h"
-
-void print_arr(std::vector<int> &arr) {
-    for (std::vector<int>::iterator i = begin(arr); i != end(arr); i++) {
-        printf("%d, ", *i);
-    }
-}
+#include "output.h"
 
 int main()
 {
 
-    std::cout << "CS560 Project" << std::endl;
+    std::cout << "CS560 Project - Analyzing Quicksort Runtimes" << std::endl;
     int n = 0;
     int x = 0;
     int isRandomArray;
@@ -23,8 +19,8 @@ int main()
     // Prompt for generated array type
     do {
         std::string input;
-        std::cout << "Select an option: \n0. Increasing Order Array, ";
-        std::cout << "1. Random Array [0,1]: ";
+        std::cout << "\nSelect an option [0,1]:" << std::endl;
+        std::cout << "0. Increasing Order Array, 1. Random Array  ";
         std::cin >> input;
         isRandomArray = atoi(input.c_str());
     } while (isRandomArray != 0 && isRandomArray != 1);
@@ -50,30 +46,47 @@ int main()
     // Prompt for quicksort type
     do {
         std::string input;
-        std::cout << "Select an option: \n0. Random Quicksort, ";
-        std::cout << "1. Quicksort [0,1]: ";
+        std::cout << "\nSelect an option [0,1]:" << std::endl;
+        std::cout << "0. Random Quicksort, 1. Quicksort  ";
         std::cin >> input;
         isQuickSort = atoi(input.c_str());
     } while (isQuickSort != 0 && isQuickSort != 1);
 
     // Generate array
-    std::vector<int> int_arr;
+    std::vector<int> orig_arr;
     if (isRandomArray) {
-        QuickSort::populate_random_array(int_arr, n);
+        QuickSort::populate_random_array(orig_arr, n);
     } else {
-        QuickSort::populate_increasing_array(int_arr, n, x);
+        QuickSort::populate_increasing_array(orig_arr, n, x);
     }
+    std::vector<int> sorted_arr = orig_arr;
 
     // Execute and time array sort
     std::clock_t start;
     start = std::clock();
     if (isQuickSort) {
-        QuickSort::quicksort(int_arr);
+        QuickSort::quicksort(sorted_arr);
     } else {
-        QuickSort::rand_quicksort(int_arr);
+        QuickSort::rand_quicksort(sorted_arr);
     }
     double total_time = (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000);
-    std::cout << "Time: " << total_time << " ms" << std::endl;
+    std::cout << "\nTime: " << total_time << " ms" << std::endl;
+
+    // Print results to file
+    std::stringstream filename;
+    filename << n << "N";
+    if (isRandomArray) {
+        filename << "_RandArr";
+    } else {
+        filename << "_" << x << "X_IncArr";
+    }
+    if (isQuickSort) {
+        filename << "_QS.txt";
+    } else {
+        filename << "_RandQS.txt";
+    }
+    Output::output_arr_file(orig_arr, sorted_arr, filename.str());
+    std::cout << "File " << filename.str() << " written.";
 
     printf("\n\n");
     return 0;
