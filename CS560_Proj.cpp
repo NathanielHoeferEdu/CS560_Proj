@@ -21,6 +21,8 @@
     The resulting arrays are printed to a file within the present working
     directory.
 
+    TODO - Add usage and examples
+
 ******************************************************************************/
 
 #include <iostream>
@@ -32,22 +34,39 @@
 #include "quicksort.h"
 #include "output.h"
 
-int main()
+const std::string RESULTS_FILEPATH = "results.csv";
+
+int main(int argc, char *argv[])
 {
     std::cout << "CS560 Project - Analyzing Quicksort Runtimes" << std::endl;
     int n = 0;
     int x = 0;
-    int isRandomArray;
-    int isQuickSort;
+    ArrayType arrayType = ArrayType::NONE;
+    SortType sortType = SortType::NONE;
+
+//    std::cout << argc << std::endl;
+//    std::cout << std::string(argv[1]) << std::endl;
+//    exit(1);
+
+    if (argc == 2) {
+        std::cout << "Compiling Report..." << std::endl;
+        std::cout << std::string(argv[1]) << std::endl;
+        QuickSort::compile_report(std::string(argv[1]));
+        exit(0);
+    }
 
     // Prompt for generated array type
     do {
         std::string input;
-        std::cout << "\nSelect an option [0,1]:" << std::endl;
-        std::cout << "0. Increasing Order Array, 1. Random Array  ";
+        std::cout << "\nSelect an option [1,2]:" << std::endl;
+        std::cout << "1. Increasing Order Array, 2. Random Array  ";
         std::cin >> input;
-        isRandomArray = atoi(input.c_str());
-    } while (isRandomArray != 0 && isRandomArray != 1);
+        if (input == "1") {
+            arrayType = ArrayType::INCREASING;
+        } else if (input == "2") {
+            arrayType = ArrayType::RANDOM;
+        }
+    } while (arrayType == ArrayType::NONE);
 
     // Prompt for N
     do {
@@ -58,7 +77,7 @@ int main()
     } while (n < 1);
 
     // Collect X if using increasing array
-    if (!isRandomArray) {
+    if (arrayType == ArrayType::INCREASING) {
         do {
             std::string input;
             std::cout << "Value of X: ";
@@ -70,44 +89,43 @@ int main()
     // Prompt for quicksort type
     do {
         std::string input;
-        std::cout << "\nSelect an option [0,1]:" << std::endl;
-        std::cout << "0. Random Quicksort, 1. Quicksort  ";
+        std::cout << "\nSelect an option [1,2]:" << std::endl;
+        std::cout << "1. Random Quicksort, 2. Quicksort  ";
         std::cin >> input;
-        isQuickSort = atoi(input.c_str());
-    } while (isQuickSort != 0 && isQuickSort != 1);
+        if (input == "1") {
+            sortType = SortType::RANDOM;
+        } else if (input == "2") {
+            sortType = SortType::STANDARD;
+        }
+    } while (sortType == SortType::NONE);
 
     // Generate array
     std::vector<int> orig_arr;
-    if (isRandomArray) {
-        QuickSort::populate_random_array(orig_arr, n);
-    } else {
-        QuickSort::populate_increasing_array(orig_arr, n, x);
-    }
+    QuickSort::populate_array(orig_arr, arrayType, n, x);
     std::vector<int> sorted_arr = orig_arr;
 
     // Execute and time array sort
-    std::clock_t start;
-    start = std::clock();
-    if (isQuickSort) {
-        QuickSort::quicksort(sorted_arr);
-    } else {
-        QuickSort::rand_quicksort(sorted_arr);
-    }
-    double total_time = (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000);
+    double total_time = QuickSort::calc_runtime(sorted_arr, sortType);
     std::cout << "\nTime: " << total_time << " ms" << std::endl;
 
     // Print results to file
     std::stringstream filename;
     filename << n << "N";
-    if (isRandomArray) {
+    if (arrayType == ArrayType::RANDOM) {
         filename << "_RandArr";
-    } else {
+    } else if (arrayType == ArrayType::INCREASING) {
         filename << "_" << x << "X_IncArr";
-    }
-    if (isQuickSort) {
-        filename << "_QS.txt";
     } else {
+        std::cout << "Invalid Array Population Type.";
+        exit(1);
+    }
+    if (sortType == SortType::STANDARD) {
+        filename << "_QS.txt";
+    } else if (sortType == SortType::RANDOM) {
         filename << "_RandQS.txt";
+    } else {
+        std::cout << "Invalid Sorting Type.";
+        exit(1);
     }
     Output::output_arr_file(orig_arr, sorted_arr, filename.str());
     std::cout << "File " << filename.str() << " written.";

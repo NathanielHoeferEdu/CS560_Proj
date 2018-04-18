@@ -17,6 +17,12 @@ public:
      */
     static void output_arr_file(std::vector<int> &orig, std::vector<int> &sorted, std::string filepath);
 
+    /**
+     * @brief Records results to a CSV file.
+     *
+     * @param The results from a running all four array and sorting type permutations over the various N times.
+     */
+    static void output_to_csv(std::vector< std::vector<double> > &results, std::string filepath);
 };
 
 #endif // OUTPUT_H
