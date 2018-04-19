@@ -30,7 +30,7 @@
 
 #include <iostream>
 #include <vector>
-#include <iostream>
+#include <iomanip>
 #include <string>
 #include <ctime>
 #include <sstream>
@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 
     // Execute and time array sort
     double total_time = QuickSort::calc_runtime(sorted_arr, sortType);
-    std::cout << "\nTime: " << total_time << " ms" << std::endl;
+    std::cout << std::setprecision(4) << std::fixed << "\nTime: " << total_time << " ms" << std::endl;
 
     // Print results to file
     std::stringstream filename;

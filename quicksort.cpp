@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
+#include <chrono>
 #include "quicksort.h"
 #include "output.h"
 
@@ -55,8 +56,7 @@ void QuickSort::populate_array(std::vector<int> &arr, ArrayType arrayType, int n
 
 double QuickSort::calc_runtime(std::vector<int> &arr, SortType sortType)
 {
-    std::clock_t start;
-    start = std::clock();
+    std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
     if (sortType == SortType::STANDARD) {
         QuickSort::quicksort(arr);
     } else if (sortType == SortType::RANDOM) {
@@ -64,7 +64,9 @@ double QuickSort::calc_runtime(std::vector<int> &arr, SortType sortType)
     } else {
         throw std::invalid_argument("Sort Type is not valid.");
     }
-    return (std::clock() - start) / (double)(CLOCKS_PER_SEC / 1000);
+    std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+    double duration = (double)std::chrono::duration_cast<std::chrono::microseconds>( end - begin ).count();
+    return duration / 1000;
 }
 
 void QuickSort::compile_report(std::string filepath)
