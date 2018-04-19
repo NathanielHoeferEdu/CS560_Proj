@@ -1,0 +1,37 @@
+==============================================================================
+ CS 560 Project - Quicksort Analysis
+==============================================================================
+
+    Author: Nathaniel Hoefer
+    Student ID: X529U639
+    Class: CS560 - Spring 2018
+    Date: 4/19/2018
+
+==============================================================================
+
+Run Instructions:
+-----------------
+
+1. Execute the following within the directory containing the makefile to
+produce the quicksort_analysis executable.
+
+    $ make
+
+2. To run a prompted version of the program, execute the following command.
+This will produce a .txt file with a name reflecting the user input.
+
+    $ ./quicksort_analysis
+
+3. To compile a report of the various permutations per Part B of the
+project, execute the following command. A CSV file named results.csv will
+be created.
+
+    $ ./quicksort_analysis results.csv
+
+
+Notes:
+------
+
+The run times will vary between computers. I've noticed that the runtimes
+reported when executed within WSU's servers are almost double of what I have
+seen on my personal computer.

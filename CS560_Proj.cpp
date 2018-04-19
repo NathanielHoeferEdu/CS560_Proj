@@ -48,8 +48,7 @@ int main(int argc, char *argv[])
 
     // Run average analysis and compile report if filepath provided as argument
     if (argc == 2) {
-        std::cout << "Compiling Report..." << std::endl;
-        std::cout << std::string(argv[1]) << std::endl;
+        std::cout << "Compiling report and writing to " << std::string(argv[1]) << "..." << std::endl;
         QuickSort::compile_report(std::string(argv[1]));
         exit(0);
     }

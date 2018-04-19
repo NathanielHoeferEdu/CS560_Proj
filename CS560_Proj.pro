@@ -11,3 +11,6 @@ SOURCES += \
 HEADERS += \
     quicksort.h \
     output.h
+
+DISTFILES += \
+    README
