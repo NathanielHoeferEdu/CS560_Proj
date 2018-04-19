@@ -14,7 +14,7 @@ void Output::output_arr_file(std::vector<int> &orig, std::vector<int> &sorted, s
         output << "=======   ========   ========" << std::endl;
         output << "Elem      Original   Sorted  " << std::endl;
         output << "=======   ========   ========" << std::endl;
-        for (int i = 0; i < orig.size(); i++) {
+        for (int i = 0; i < int(orig.size()); i++) {
             std::stringstream elem;
             elem << "[" << i << "]";
             output << std::setw(10) << std::left << elem.str();
@@ -33,20 +33,20 @@ void Output::output_to_csv(std::vector<std::vector<double> > &results, std::stri
     output.exceptions (std::ifstream::failbit | std::ifstream::badbit);
     try {
         output.open(filepath);
-        output << "Array Type, Sort Type, N=10, N=100, N=1000, N=10000" << std::endl;
-        output << "Increasing Array Type, Quicksort,";
+        output << "Array Type - Sort Type, 10, 100, 1000, 10000" << std::endl;
+        output << "Increasing Array Type - Quicksort,";
         for (std::vector<double>::iterator i = results[0].begin(); i != results[0].end(); i++) {
             output << *i << ",";
         }
-        output << "\nIncreasing Array Type, Random Quicksort,";
+        output << "\nIncreasing Array Type - Random Quicksort,";
         for (std::vector<double>::iterator i = results[1].begin(); i != results[1].end(); i++) {
             output << *i << ",";
         }
-        output << "\nRandom Array Type, Quicksort,";
+        output << "\nRandom Array Type - Quicksort,";
         for (std::vector<double>::iterator i = results[2].begin(); i != results[2].end(); i++) {
             output << *i << ",";
         }
-        output << "\nRandom Array Type, Random Quicksort,";
+        output << "\nRandom Array Type - Random Quicksort,";
         for (std::vector<double>::iterator i = results[3].begin(); i != results[3].end(); i++) {
             output << *i << ",";
         }

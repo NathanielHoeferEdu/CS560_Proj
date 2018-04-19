@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 
+/**
+ * @brief Provides methods to write quicksort data to files.
+ */
 class Output
 {
 public:

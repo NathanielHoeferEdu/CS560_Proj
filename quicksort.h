@@ -21,6 +21,9 @@ struct ArrayTypes {
 };
 typedef ArrayTypes::Types ArrayType;
 
+/**
+ * @brief Provides methods associated with quicksort to analyze runtimes under various conditions.
+ */
 class QuickSort
 {
 public:

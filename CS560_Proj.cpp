@@ -21,7 +21,10 @@
     The resulting arrays are printed to a file within the present working
     directory.
 
-    TODO - Add usage and examples
+    If a filepath is passed in as a command argument, then a report of average
+    runtimes will be generated of the four permutations of array value types
+    and sorting algorithms using N=10, 100, 1000, 10000. The report will then
+    be stored to that file name in CSV format.
 
 ******************************************************************************/
 
@@ -34,7 +37,6 @@
 #include "quicksort.h"
 #include "output.h"
 
-const std::string RESULTS_FILEPATH = "results.csv";
 
 int main(int argc, char *argv[])
 {
@@ -44,10 +46,7 @@ int main(int argc, char *argv[])
     ArrayType arrayType = ArrayType::NONE;
     SortType sortType = SortType::NONE;
 
-//    std::cout << argc << std::endl;
-//    std::cout << std::string(argv[1]) << std::endl;
-//    exit(1);
-
+    // Run average analysis and compile report if filepath provided as argument
     if (argc == 2) {
         std::cout << "Compiling Report..." << std::endl;
         std::cout << std::string(argv[1]) << std::endl;
